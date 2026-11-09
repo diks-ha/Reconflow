@@ -5,7 +5,10 @@ import { api, errorMessage } from '../api/client'
 import type { RateCard } from '../api/types'
 import { Badge, Button, DataTable, EmptyState, ErrorState, Field, PageHeader, Panel, Skeleton, TextInput, useToast } from '../components/UI'
 
-type RateForm = Omit<RateCard, 'id' | 'is_active'>
+type RateForm = Omit<RateCard, 'id' | 'is_active' | 'max_weight' | 'effective_to'> & {
+  max_weight: string
+  effective_to: string
+}
 type RateHistory = { id: string; rate_card_id: string; version_number: number; snapshot: Record<string, unknown>; changed_by: string; created_at: string }
 const blank: RateForm = { channel: '', courier_partner: '', min_weight: '0', max_weight: '', forward_fee: '', return_fee: '0', cod_fee: '0', fixed_charge: '0', percentage_charge: '0', effective_from: new Date().toISOString().slice(0, 10), effective_to: '', source_note: '' }
 const feeKeys: (keyof RateForm)[] = ['forward_fee','return_fee','cod_fee','fixed_charge','percentage_charge']
